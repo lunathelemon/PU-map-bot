@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+group 'io.github.profjb58'
+version '1.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    // Environment variables
+    implementation 'io.github.cdimascio:dotenv-java:2.2.4'
+
+    // Log4j Logger
+    implementation 'org.apache.logging.log4j:log4j-core:2.18.0'
+
+    // Jackson JSON
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+
+    // JDBC connector
+    implementation 'mysql:mysql-connector-java:8.0.30'
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'io.github.profjb58.pumapbot.PUMapBot'
+        )
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(16))
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
